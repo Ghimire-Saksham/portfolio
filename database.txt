@@ -1,0 +1,125 @@
+CREATE DATABASE hospital_db;
+---------------------------------------------First create database only-------------------------------------------------------------------
+now you can copy and paste all into sql and run;
+
+
+CREATE TABLE patients (
+    p_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(255) COLLATE utf8mb4_general_ci,
+    lastname VARCHAR(255) COLLATE utf8mb4_general_ci,
+    email VARCHAR(255) COLLATE utf8mb4_general_ci,
+    phone_no VARCHAR(20) COLLATE utf8mb4_general_ci,
+    password VARCHAR(255) COLLATE utf8mb4_general_ci,
+    gender ENUM('Male', 'Female') COLLATE utf8mb4_general_ci,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+INSERT INTO patients (firstname, lastname, email, phone_no, password, gender) VALUES
+('John', 'Doe', 'john.doe@example.com', '9834567890', 'password123', 'Male'),
+('Jane', 'Smith', 'jane.smith@example.com', '9887654321', 'password456', 'Female'),
+('Alice', 'Johnson', 'alice.johnson@example.com', '9822334455', 'password789', 'Female'),
+('Bob', 'Brown', 'bob.brown@example.com', '9833445566', 'password101', 'Male'),
+('Charlie', 'Davis', 'charlie.davis@example.com', '9844556677', 'password202', 'Male');
+
+
+CREATE TABLE doctors (
+    d_id INT(11) NOT NULL AUTO_INCREMENT,
+    Username VARCHAR(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+    specialization VARCHAR(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+    email VARCHAR(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+    password VARCHAR(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+    fees DECIMAL(10,2) DEFAULT NULL,
+    PRIMARY KEY (d_id)
+);
+
+
+INSERT INTO doctors (Username, specialization, email, password, fees) VALUES
+('Dr. Jenish', 'Cardiologist', 'john.doe@example.com', 'password123', 150.00),
+('Dr. Harry', 'Neurologist', 'jane.smith@example.com', 'password456', 200.00),
+('Dr. Dickinsion', 'Pediatrician', 'emily.davis@example.com', 'password789', 100.00),
+('Dr. Jackson', 'General', 'michael.brown@example.com', 'password321', 180.00),
+('Dr. Sabindra', 'General', 'sarah.wilson@example.com', 'password654', 120.00);
+
+
+CREATE TABLE receptionist (
+    ReceptionistID INT(11) NOT NULL AUTO_INCREMENT,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    ContactNumber VARCHAR(15) NOT NULL,
+    Email VARCHAR(100) DEFAULT NULL,
+    Username VARCHAR(50) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (ReceptionistID)
+);
+
+
+INSERT INTO receptionist (FirstName, LastName, ContactNumber, Email, Username, Password) VALUES
+('Jenny', 'Doe', '1234567890', 'john.doe@example.com', 'johndoe', 'password123'),
+('June', 'Smith', '0987654321', 'jane.smith@example.com', 'janesmith', 'password456'),
+('Alice', 'Johnson', '5551234567', 'alice.johnson@example.com', 'alicej', 'password789'),
+('Boby', 'Brown', '4449876543', 'bob.brown@example.com', 'bobb', 'password321'),
+('Charls', 'Davis', '3336549870', NULL, 'charlied', 'password654');
+
+
+CREATE TABLE appointments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    patient_id INT NOT NULL,
+    first_name VARCHAR(255) DEFAULT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    specialization VARCHAR(255) NOT NULL,
+    doctor VARCHAR(255) NOT NULL,
+    fee DECIMAL(10,2) NOT NULL,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    action VARCHAR(255) DEFAULT 'Active',
+    d_id INT DEFAULT NULL
+);
+
+
+INSERT INTO appointments (patient_id, first_name, last_name, specialization, doctor, fee, date, time, action, d_id) VALUES
+(1, 'John', 'Doe', 'Cardiologist', 'Dr.Jenish', 150.00, '2025-02-14', '09:00:00', 'Active', 1),
+(2, 'Jane', 'Smith', 'Neurologist', 'Dr.Harry', 200.00, '2025-02-15', '10:00:00', 'Active', 2),
+(3, 'Alice', 'Johnson', 'Pediatrician', 'Dr.Dickinsion', 100.00, '2025-02-16', '11:00:00', 'Active', 3),
+(4, 'Bob', 'Brown', 'General', 'Dr.Jackson', 180.00, '2025-02-17', '12:00:00', 'Active', 4),
+(5, 'Charlie', 'Davis', 'General', 'Dr.Sabindra', 120.00, '2025-02-18', '13:00:00', 'Active', 5);
+
+
+CREATE TABLE prescriptions (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    patient_id INT(11) NOT NULL,
+    doctor_id INT(11) NOT NULL,
+    appointment_id INT(11) NOT NULL,
+    disease TEXT COLLATE utf8mb4_general_ci,
+    allergies TEXT COLLATE utf8mb4_general_ci,
+    prescription TEXT COLLATE utf8mb4_general_ci,
+    status VARCHAR(50) COLLATE utf8mb4_general_ci,
+    prescribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
+
+INSERT INTO prescriptions (patient_id, doctor_id, appointment_id, disease, allergies, prescription, status) VALUES
+(1, 1, 1, 'Flu', 'None', 'Rest and hydration', 'Active'),
+(2, 2, 2, 'Diabetes', 'Penicillin', 'Insulin', 'Active'),
+(3, 3, 3, 'Hypertension', 'None', 'Amlodipine', 'Active'),
+(4, 4, 4, 'Asthma', 'Dust', 'Inhaler', 'Active'),
+(5, 5, 5, 'Migraine', 'None', 'Painkillers', 'Inactive');
+
+
+CREATE TABLE queries (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    user_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    contact VARCHAR(20) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO queries (user_name, email, contact, message) VALUES
+('JohnDoe', 'john.doe@example.com', '1234567890', 'This is a test message.'),
+('JaneSmith', 'jane.smith@example.com', '0987654321', 'Another test message.'),
+('AliceJohnson', 'alice.johnson@example.com', '5551234567', 'Yet another test message.'),
+('BobBrown', 'bob.brown@example.com', '4449876543', 'Test message number four.'),
+('CharlieDavis', 'charlie.davis@example.com', '3336547890', 'Final test message.');

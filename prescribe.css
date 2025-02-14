@@ -1,0 +1,53 @@
+
+.prescribe-form {
+  max-width: 500px;          
+  margin: 5rem auto;        
+  padding: 2rem;             
+  background-color: #fff;    
+  border-radius: 8px;       
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+
+.prescribe-form .form-group {
+  margin-bottom: 1rem ;       
+}
+
+
+.prescribe-form .form-group label {
+  display: block;           
+  font-weight: bold;       
+  margin-bottom: 0.4rem;        
+}
+
+
+.prescribe-form .form-group textarea {
+  width: 100%;               
+ height: 6rem;    
+ font-family: 'Poppins', sans-serif;        
+  border: 1px solid #ccc;   
+  border-radius: 4px;        
+  box-sizing: border-box;    
+  resize: none;
+}
+
+
+.prescribe-form .prescribe-button {
+  background-color: #007bff;         
+  color: white;                      
+  padding: 10px 20px;                 
+   border: none;                      
+  border-radius: 5px;                
+  cursor: pointer;                   
+  font-size: 16px;                   
+  transition: background-color 0.3s; 
+  width: 100%;                       
+}
+
+
+.prescribe-form .prescribe-button:hover {
+  background-color: #0056b3;         
+}
+ .prescribe-form #prescript {
+ margin: none;
+}
